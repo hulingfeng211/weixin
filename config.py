@@ -7,39 +7,40 @@
 +Created Time:2015年07月22日 星期三 10时48分55秒
 +Description:应用程序配置文件
 +============================================================"""
-import  os
+import os
 
-
-#开启程序的debug模式
+# 开启程序的debug模式
 DEBUG=True
 
-#指定静态文件的路经
+# 指定静态文件的路经
 STATIC_PATH=os.path.join(os.path.dirname(__file__),"static")
 
-#指定模版文件的路经
+# 安全Cookie设置,生成请参见README.md
+COOKIE_SECRET = "YaEw9bPmScGNisoXLNjvxUF7SbYBm0+tsV4WMyNZqXc=",
+
+# 指定模版文件的路经
 TEMPLATE_PATH=os.path.join(os.path.dirname(__file__),'templates')
-#TEMPLATE_PATH=os.path.join(os.path.dirname(__file__),'front')
+# TEMPLATE_PATH=os.path.join(os.path.dirname(__file__),'front')
+
+# 系统代理设置
 PROXY_SETTINGS={
     "proxy_host": "192.168.2.7",
     "proxy_port": 3128
 }
-PROXY_HOST='192.168.2.7'
-PROXY_PORT=3128
 
 REDIS_SETTINGS={
-    'host':"localhost",
-    'port':6379,
-    'db':3
+    "host": "localhost",
+    "port": 6379,
+    "db": 3
 }
-MONGO_URL="mongodb://localhost:27017"
+MONGO_URL = "mongodb://localhost:27017"
 
-
-#微信设置
+# 微信设置
 WEIXIN_SETTINGS={
-    'CorpID':'wx14c57c94c45b9c09',
-    'Secret':'k3yqQQjyMWkwBrNNj5E-Dxwleyh-la2CEBTFzRe05sMFZnR7AhZN33F03CXApmOW',#测试管理员组的Secret
-    'AgentId':3,
-    'Token':'qC7nq53RTJcCzsNwcnklXxymBwfUd99',
-    'EncodingAESKey':'rp6jgUcEAuh70oz5nPwF2BKtJq7nd3OFdskPdjnmEdi'
+    "CorpID": "wx14c57c94c45b9c09",
+    "Secret": "k3yqQQjyMWkwBrNNj5E-Dxwleyh-la2CEBTFzRe05sMFZnR7AhZN33F03CXApmOW",  # 测试管理员组的Secret
+    "AgentId": 3,
+    "Token": "qC7nq53RTJcCzsNwcnklXxymBwfUd99",
+    "EncodingAESKey": "rp6jgUcEAuh70oz5nPwF2BKtJq7nd3OFdskPdjnmEdi"
 }
-#END微信设置
+# END微信设置

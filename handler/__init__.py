@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from tornado.gen import coroutine
 from tornado.web import RequestHandler, HTTPError
 
-from core import generate_response, is_json_request, json_encode, clone_dict_without_id
+from core import generate_response, is_json_request, bson_encode, clone_dict_without_id
 
 __author__ = 'george'
 
@@ -27,12 +27,12 @@ class CRUDHandler(RequestHandler):
         if id:
             db = self.settings['db']
             role = yield db[self.cname].find_one({"_id": ObjectId(id)})
-            self.write(json_encode(role))
+            self.write(bson_encode(role))
             return
         # get all role
         db = self.settings['db']
         roles = yield db[self.cname].find({}).to_list(length=None)
-        self.write(json_encode(
+        self.write(bson_encode(
             roles))
 
     @coroutine
@@ -58,6 +58,7 @@ class CRUDHandler(RequestHandler):
         else:
             yield db[self.cname].insert(clone_dict_without_id(body))
         self.write(generate_response(message="保存成功"))
+
 
 def get_user_menu_tree(db):
     def get_node_child(node):

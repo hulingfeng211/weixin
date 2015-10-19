@@ -17,3 +17,7 @@
    
 # cookie_secret 的生成方法
      base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
+
+# 安装说明
+     
+     pip install -r requests.txt #安装依赖的组件
