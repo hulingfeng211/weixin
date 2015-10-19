@@ -15,6 +15,7 @@ if __name__ == "__main__":
     app = Application([
         (r'/message', IndexHandler)
     ])
+
     app.listen(11000)
     print 'listen to 11000'
     IOLoop.current().start()
