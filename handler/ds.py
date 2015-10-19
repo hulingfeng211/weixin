@@ -10,6 +10,8 @@ __author__ = 'george'
 =
 
 """
+
+
 class InstallTrayHandler(WeiXinRequstHandler):
     """安装托盘任务提交"""
     @coroutine
