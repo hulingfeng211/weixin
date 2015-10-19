@@ -23,12 +23,12 @@ TEMPLATE_PATH=os.path.join(os.path.dirname(__file__),'templates')
 # TEMPLATE_PATH=os.path.join(os.path.dirname(__file__),'front')
 
 # 系统代理设置
-PROXY_SETTINGS={
+PROXY_SETTINGS = {
     "proxy_host": "192.168.2.7",
     "proxy_port": 3128
 }
 
-REDIS_SETTINGS={
+REDIS_SETTINGS = {
     "host": "localhost",
     "port": 6379,
     "db": 3
@@ -36,7 +36,7 @@ REDIS_SETTINGS={
 MONGO_URL = "mongodb://localhost:27017"
 
 # 微信设置
-WEIXIN_SETTINGS={
+WEIXIN_SETTINGS = {
     "CorpID": "wx14c57c94c45b9c09",
     "Secret": "k3yqQQjyMWkwBrNNj5E-Dxwleyh-la2CEBTFzRe05sMFZnR7AhZN33F03CXApmOW",  # 测试管理员组的Secret
     "AgentId": 3,

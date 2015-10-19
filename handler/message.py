@@ -25,6 +25,7 @@ from wechat.WXBizMsgCrypt import WXBizMsgCrypt
 
 __author__ = 'george'
 
+
 class MessageHandler(WeiXinRequstHandler):
     """RESTFul服务接口，用于发送微信消息"""
     @coroutine
@@ -162,18 +163,16 @@ class MediaHanlder(WeiXinRequstHandler):
             file_type=mimetypes.guess_type(file_name)[0] or "other"
             type = allow_media_file_types.get(file_type,"file")
 
-
-
             upload_type=args[0] if len(args)>0 else 'provisional'
             if upload_type=='provisional':
-                #临时素材
+                # 临时素材
                 upload_file_url = constant.UPLOAD_PROVISIONAL_MEDIA_URL%(type,self.access_token)
             else:
-                #永久素材
+                # 永久素材
                 upload_file_url = constant.UPLOAD_FOREVER_MEDIA_URL%(self.settings[constant.WEIXIN_SETTINGS][constant.AgentId],type,self.access_token)
 
-            proxy_host = self.settings['proxy_host']
-            proxy_port = self.settings['proxy_port']
+            proxy_host = self.settings[constant.PROXY_SETTINGS][constant.PROXY_HOST]
+            proxy_port = self.settings[constant.PROXY_SETTINGS][constant.PROXY_PORT]
             proxies = None
             if proxy_host and proxy_port:
                 proxies = {
