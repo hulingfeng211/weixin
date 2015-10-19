@@ -1,0 +1,27 @@
+{
+  "button": [{
+      "name": "网站栏目",
+      "key": "key_1",
+      "sub_button":[
+        {
+          "type": "view",
+          "name": "新站点",
+          "key": "key_1_1",
+          "url":"http://test.chinasws.com"
+
+        }
+      ]
+    },
+     {
+      "type": "click",
+      "name": "安装托盘",
+      "key": "key_2_2"
+    },
+
+    {
+      "type": "click",
+      "name": "关于我们",
+      "key": "key_3"
+    }
+  ]
+}

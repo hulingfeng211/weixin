@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--托盘申请-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>托盘申请</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/angular-ui-select/select.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid" ng-app="app">
+    <div class="row" ng-controller="AppController">
+        <form>
+            <legend>托盘申请</legend>
+
+
+            <div class="form-group">
+                <label>船号:</label>
+                <select name="shipno" ng-model="shipno" class="form-control">
+                    <option>H1101</option>
+                    <option>H1102</option>
+                    <option>H1103</option>
+                    <option>H1104</option>
+                    <option>H1105</option>
+                    <option>H1106</option>
+                    <option>H1107</option>
+                    <option>H1108</option>
+                    <option>H1109</option>
+                    <option>H11010</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>分段:</label>
+
+                <ui-select multiple ng-model="selected_block" theme="bootstrap" ng-disabled="disabled">
+                    <ui-select-match placeholder="选择权限...">{{$item.desc}}
+                        &lt;{{$item.name}}&gt;</ui-select-match>
+                    <ui-select-choices group-by="someGroupFn"
+                                       repeat="p in blocks | propsFilter: {name: $select.search, desc: $select.search}">
+                        <div ng-bind-html="p.name | highlight: $select.search"></div>
+                        <small>
+                            <span ng-bind-html="''+p.desc | highlight: $select.search"></span>
+                        </small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group">
+                <label>阶段:</label>
+                <select class="form-control" ng-model="step">
+                    <option>C</option>
+                    <option>B</option>
+                    <option>P</option>
+                    <option>U</option>
+                    <option>D</option>
+                    <option>Q</option>
+                </select>
+            </div>
+
+            <button type="submit" ng-click="submit" class="btn btn-primary pull-right">提交</button>
+        </form>
+    </div>
+</div>
+<script src="/static/angular/angular.min.js"></script>
+<script src="/static/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="/static/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="/static/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/static/angular-ui-select/select.min.js"></script>
+<script src="/static/jquery-2.1.4.min.js"></script>
+<script src="/static/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    app = angular.module('app', ['ngSanitize','ui.select']);
+
+
+    app.filter('propsFilter', function () {
+        return function (items, props) {
+            var out = [];
+
+            if (angular.isArray(items)) {
+                items.forEach(function (item) {
+                    var itemMatches = false;
+
+                    var keys = Object.keys(props);
+                    for (var i = 0; i < keys.length; i++) {
+                        var prop = keys[i];
+                        var text = props[prop].toLowerCase();
+                        if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                            itemMatches = true;
+                            break;
+                        }
+                    }
+
+                    if (itemMatches) {
+                        out.push(item);
+                    }
+                });
+            } else {
+                // Let the output be the input untouched
+                out = items;
+            }
+
+            return out;
+        };
+    });
+    app.controller('AppController', ['$scope', '$http', function ($scope, $http) {
+        $scope.selected_block = [];
+        $scope.blocks = [];
+        $scope.submit = function () {
+
+        };
+        $scope.selected_block = [];
+        $scope.blocks = [
+            {
+                "name": "101",
+                "desc": "101"
+            },
+            {
+                "name": "102",
+                "desc": "102"
+            },
+            {
+                "name": "103",
+                "desc": "103"
+            },
+            {
+                "name": "104",
+                "desc": "104"
+            },
+            {
+                "name": "105",
+                "desc": "106"
+            }
+        ];
+        //todo
+    }]);
+
+</script>
+</body>
+</html>
