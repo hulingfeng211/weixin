@@ -80,13 +80,10 @@ message_type_tuple={
 
 
 class WeiXinRequstHandler(RequestHandler):
-    def __init__(self):
-        self.access_token = None
 
     @coroutine
     def prepare(self):
-        access_token = yield get_access_token()
-        self.access_token = access_token
+        self.access_token = yield get_access_token()
 
 
 allow_media_file_types={
