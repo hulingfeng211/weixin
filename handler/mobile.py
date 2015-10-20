@@ -8,6 +8,7 @@
 |   Description:与手机相关的请求在该模块下进行处理
 +============================================================"""
 import json
+from tornado import escape
 
 from tornado.gen import coroutine
 from torndsession.sessionhandler import SessionBaseHandler
@@ -48,6 +49,19 @@ class BaseHandler(SessionBaseHandler):
             self.redirect(url)
 
         SessionBaseHandler.prepare(self)  # 调用父类方法
+
+    def get_current_user(self):
+        """获取当前登陆的用户"""
+        session_id=self.session.id
+        if session_id:
+            user_id=self.session.get('user_id',None)
+            if not user_id:
+                return None
+            else:
+                url=constant.QUYER_USER_DEATIL_URL%(self.access_token,user_id)
+                future = send_request(url)
+
+                return escape.json_decode(future.result().body)
 
 
 class IndexHandler(BaseHandler):

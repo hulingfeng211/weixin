@@ -14,6 +14,8 @@ QUERY_AUTH_CODE_URL = """https://open.weixin.qq.com/connect/oauth2/authorize?
 appid=%(CorpID)s&redirect_uri=%(redirect_uri)s&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"""
 QUERY_USER_URL = 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=%s&code=%s'
 QUERY_USER_INFO_URL='https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=%s&code=%s'
+QUYER_USER_DEATIL_URL='https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=%s&userid=%s'
+
 # 永久素材上传
 UPLOAD_FOREVER_MEDIA_URL='https://qyapi.weixin.qq.com/cgi-bin/material/add_material?agentid=%s&type=%s&access_token=%s'
 

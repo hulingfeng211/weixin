@@ -1,2 +1,4 @@
 tornado==4.2.1
 motor==0.4
+torndsession=1.1.2
+tornado-redis=2.4.18
