@@ -5,7 +5,8 @@ import logging
 from bson.objectid import ObjectId
 from tornado.gen import coroutine
 from tornado.web import RequestHandler, HTTPError
-from core import json_encode, is_json_request, generate_response, clone_dict_without_id, make_password
+from core import bson_encode, is_json_request, generate_response, clone_dict_without_id
+from core.utils import make_password
 from handler import CRUDHandler
 
 __author__ = 'george'
@@ -17,10 +18,10 @@ class UserHandler(RequestHandler):
         db=self.settings['db']
         if user_id:
             user =yield db.user.find_one({"_id":ObjectId(user_id)})
-            self.write(json_encode(user))
+            self.write(bson_encode(user))
         else:
             users=yield db.user.find({}).to_list(length=None)
-            self.write(json_encode(users))
+            self.write(bson_encode(users))
     @coroutine
     def delete(self, *args, **kwargs):
         id = args[0] if len(args) > 0 else None
@@ -57,11 +58,11 @@ class MenuHandler(RequestHandler):
             return node
         if args[0] if len(args)>0 else None and args[0]=='all_leaf':#取所有的叶子节点
             leaf_node=list(db.menu.find({"is_leaf":True}))
-            self.write(json_encode(leaf_node))
+            self.write(bson_encode(leaf_node))
         else:
             root_node= db.menu.find({"parent_uid":{"$exists":False}})
             result=[get_node_child(itm) for itm  in root_node]
-            self.write(json_encode(result))
+            self.write(bson_encode(result))
     def post(self, *args, **kwargs):
         if is_json_request(self.request):
             body=json.loads(self.request.body)

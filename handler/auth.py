@@ -8,7 +8,8 @@ from tornado.gen import coroutine
 
 from tornado.web import RequestHandler, HTTPError
 
-from core import is_json_request, json_encode, make_password
+from core import is_json_request, bson_encode
+from core.utils import make_password
 from handler import get_user_menu_tree
 
 __author__ = 'george'
@@ -87,7 +88,7 @@ class LoginHandler(RequestHandler):
                     }
                 }
 
-                self.write(json_encode(result))
+                self.write(bson_encode(result))
             else:
                 self.write("密码输入错误")
                 self.finish()
@@ -123,7 +124,7 @@ class SignupHandler(RequestHandler):
         else:
             body['password'] = make_password(body.get('password'))
             yield db.user.insert(body)
-            self.write(json_encode({"user": body}))
+            self.write(bson_encode({"user": body}))
 
 
 route = [

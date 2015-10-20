@@ -78,7 +78,11 @@ message_type_tuple={
     'mpnews':generate_media_message,
 }
 
+
 class WeiXinRequstHandler(RequestHandler):
+    def __init__(self):
+        self.access_token = None
+
     @coroutine
     def prepare(self):
         access_token = yield get_access_token()

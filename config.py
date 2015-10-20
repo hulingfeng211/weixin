@@ -33,6 +33,17 @@ REDIS_SETTINGS = {
     "port": 6379,
     "db": 3
 }
+# SESSION相关的配置
+SESSION = {
+    "driver": 'redis',
+    "driver_settings": dict(
+        host='localhost',
+        port=6379,
+        db=4,
+        max_connections=1024
+    )
+}
+
 MONGO_URL = "mongodb://localhost:27017"
 
 # 微信设置
