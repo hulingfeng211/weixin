@@ -61,7 +61,12 @@ def clone_dict_without_id(obj):
     """复制一个字典对象，去除字典的id列
     :param obj 字典类型的对象
     :return 返回新生成的字典类型"""
-    return {key: val for key, val in obj.items() if key != "_id" and key != "id"}
+    #return {key: val for key, val in obj.items() if key != "_id" and key != "id"}
+    newobj={}
+    for key, val in obj.items():
+        if key == '_id' or key == "id":
+            continue
+        newobj[key]=val
 
 
 class MongoEncoder(JSONEncoder):

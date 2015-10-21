@@ -251,7 +251,7 @@ app.directive('dragMe', ['$drag', function($drag){
 // For this trivial demo we have just a unique MainController 
 // for everything
 //
-app.controller('MainController', function($rootScope, $scope){
+app.controller('MainController', function($rootScope, $scope,$http){
 
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);
@@ -287,6 +287,11 @@ app.controller('MainController', function($rootScope, $scope){
     /* global alert: false; */
     alert('Congrats you scrolled to the end of the list!');
   };
+  //get current user
+  $http.get('/mobile/user').success(function(user){
+                $scope.user=user;
+
+   });
 
   // 
   // Right Sidebar

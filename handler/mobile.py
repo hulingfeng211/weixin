@@ -73,8 +73,8 @@ class IndexHandler(BaseHandler):
         if user_id:
             self.write('userid')
         else:
-
-            self.write(json.dumps(self.get_current_user()))
+            user=yield  self.get_current_user()
+            self.write(json.dumps(user))
             #get
             pass
 
@@ -82,15 +82,16 @@ class IndexHandler(BaseHandler):
     def post(self, *args, **kwargs):
         pass
 
-class TestHanlder(RequestHandler):
 
+class UserHandler(BaseHandler):
+    @coroutine
     def get(self, *args, **kwargs):
-        a="""<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14c57c94c45b9c09&redirect_uri=http%3A%2F%2Ftest.chinasws.com%2Fmobile%2Findex.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect">LinkME</a>"""
-        self.write(a)
+        user=yield self.get_current_user()
+        self.write(json.dumps(user))
 
 
 route = [(r'/mobile/index.html', IndexHandler),
-         (r'/mobile/test.html',TestHanlder),]
+         (r'/mobile/user',UserHandler),]
 
 
 if __name__== "__main__":
