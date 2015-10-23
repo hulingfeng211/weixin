@@ -21,6 +21,8 @@ UPLOAD_FOREVER_MEDIA_URL='https://qyapi.weixin.qq.com/cgi-bin/material/add_mater
 QUERY_MEDIA_URL='https://qyapi.weixin.qq.com/cgi-bin/material/batchget?access_token=%s'
 CREATE_MENU_URL='https://qyapi.weixin.qq.com/cgi-bin/menu/create?access_token=%s&agentid=%s'
 
+# 新浪财经股票数据
+SINA_STOCK_URL = 'http://hq.sinajs.cn/list=%s' # 股票代码
 BASE_URL = "http://test.chinasws.com"
 ACCESS_TOKEN = "access_token"
 WEIXIN_SETTINGS = "weixin_settings"

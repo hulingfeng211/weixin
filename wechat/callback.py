@@ -10,6 +10,7 @@ from tornado.httpclient import AsyncHTTPClient
 
 import constant
 from core import settings
+from core.utils import send_request
 from wechat import get_access_token, generate_message
 
 __author__ = 'george'
@@ -32,7 +33,30 @@ def deal_with_text_message(message,*args,**kwargs):
     #time.sleep(10)  #block 10s
     # sleep(10) #noblock 10s
     # 当用户输入消息字符长度为11位时，默认认为时托盘号，返回托盘明细的图文消息
-    if len(body['content']) == 11:
+    if len(body['content'])==8: # 新浪股票
+        url=constant.SINA_STOCK_URL%body['content']
+        res=yield send_request(url)
+        result=res.body.strip()[:-1].split('=')[1][1:-1].split(',')
+        if len(result)>1: # 正确取到数据
+            message_body = {
+            "articles": [
+                {
+                    "title": "股票代码:[%s] 股票:[%s]" % (body['content'],result[0].decode('gb2312').encode('utf-8')),
+                    "thumb_media_id": "2NDpAUrBpMTQjFYMqFv_CqeEyxDx1jkYWABfC2-L08MLNzp6KdfzNvcGJHApkx7trKaapH8VEQ2KjAS2Uo0q7Bw",
+                    "author": "新浪财经",
+                    "content": "%s"%result,
+                    "digest": "当前成交价:%s"%result[3],
+                }]
+        }
+
+            yield send_message(message.find('FromUserName').text, message_body,
+                           settings[constant.WEIXIN_SETTINGS][constant.AgentId], 'mpnews')
+
+        else :
+            message_body = {"content": "请确认你输入的股票代码【" + body['content'] + '】是否正确或存在?'}
+            yield send_message(body['fromusername'], message_body, settings[constant.WEIXIN_SETTINGS][constant.AgentId],"text")
+
+    elif len(body['content']) == 11:
         message_body = {
             "articles": [
                 {
