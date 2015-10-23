@@ -105,10 +105,11 @@ def deal_with_location_message(message,*args,**kwargs):
 @coroutine
 def deal_with_event_message(type,message,*args,**kwargs):
     """处理各种事件"""
-    print type
-    print event_type_handle_map
+    logging.info(type)
+    logging.info(event_type_handle_map)
     func = event_type_handle_map.get(type)
-    yield func(type, message, *args, **kwargs)
+    if func:
+        yield func(type, message, *args, **kwargs)
 
 
 @coroutine
