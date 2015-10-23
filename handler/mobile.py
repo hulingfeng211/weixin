@@ -86,8 +86,12 @@ class IndexHandler(BaseHandler):
 class UserHandler(BaseHandler):
     @coroutine
     def get(self, *args, **kwargs):
-        user=yield self.get_current_user()
-        self.write(json.dumps(user))
+        next_url=self.get_query_argument("next",None)
+        if next_url:
+            self.redirect(next_url)
+        else:
+            user=yield self.get_current_user()
+            self.write(json.dumps(user))
 
 
 route = [(r'/mobile/index.html', IndexHandler),
