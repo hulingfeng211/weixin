@@ -12,7 +12,9 @@ var app = angular.module('MobileAngularUiExamples', [
   // easy to use alternative to other 3rd party libs like hammer.js, with the
   // final pourpose to integrate gestures into default ui interactions like 
   // opening sidebars, turning switches on/off ..
-  'mobile-angular-ui.gestures'
+  'mobile-angular-ui.gestures',
+    'chart.js'
+
 ]);
 
 app.run(function($transform) {
@@ -294,6 +296,14 @@ app.controller('MainController', function($rootScope, $scope,$http){
                 $scope.user=user;
 
    });
+  // begin charts
+  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+  //end
 
   // 
   // Right Sidebar
