@@ -29,22 +29,23 @@ PROXY_SETTINGS = {
 }
 
 REDIS_SETTINGS = {
-    "host": "localhost",
+    "host": "192.168.2.14",
     "port": 6379,
-    "db": 3
+    "db": 15
 }
 # SESSION相关的配置
 SESSION = {
     "driver": 'redis',
     "driver_settings": dict(
-        host='localhost',
+        host='192.168.2.7',
         port=6379,
-        db=4,
+        db=16,
         max_connections=1024
     )
 }
 
-MONGO_URL = "mongodb://localhost:27017"
+MONGO_URL = "mongodb://192.168.2.14:27017"
+
 
 # 微信设置
 WEIXIN_SETTINGS = {

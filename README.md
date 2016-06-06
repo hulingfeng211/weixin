@@ -36,6 +36,24 @@
       cat 'export PYCURL_SSL_LIBRARY = nss '>>~/.bash_profile
       source ~/.bash_profile
       pip install pycurl
+
+## git 
+###  create a new repository on the command line
+  echo "# test" >> README.md
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git remote add origin https://github.com/hulingfeng211/weixin.git
+  git push -u origin master
+
+### push an existing repository from the command line
+
+  git remote add origin https://github.com/hulingfeng211/weixin.git
+  git push -u origin master
+  
+
+
+
       
    
    
