@@ -18,7 +18,7 @@ from tornado.gen import coroutine
 from tornado.httpclient import AsyncHTTPClient
 
 from core import settings
-from handler import auth, message, rbac, ds, mobile
+from handler import auth, message, rbac, ds, mobile,weui
 
 define('port', default=10000, type=int, help="在此端口接收用户请求")
 
@@ -53,6 +53,7 @@ class App(Application):
         handlers.extend(message.route)
         handlers.extend(rbac.route)
         handlers.extend(ds.route)
+        handlers.extend(weui.routes)
         handlers.extend(mobile.route)
         Application.__init__(self, handlers=handlers, **settings)
 
